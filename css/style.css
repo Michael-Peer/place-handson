@@ -7,6 +7,11 @@
     src: url(../fonts/Lobster-Regular.ttf)
 }
 
+li {
+    padding: 0;
+    margin: 0;
+}
+
 h1,
 h2,
 h3,
@@ -30,4 +35,11 @@ h6 {
 
 .map-container {
     padding: 20px;
+    margin-bottom: 10px;
+}
+
+.list-container {
+    width: 300px;
+    height: auto;
+    background-color: grey;
 }

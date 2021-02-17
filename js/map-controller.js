@@ -36,9 +36,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                center: { lat, lng },
-                zoom: 15
-            })
+                    center: { lat, lng },
+                    zoom: 15
+                })
             console.log('Map!', gMap);
 
             //set on map click listener
@@ -136,4 +136,16 @@ function _connectGoogleApi() {
         elGoogleApi.onload = resolve;
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
+}
+renderLocationList()
+
+function renderLocationList() {
+    const locations = mapService.getLocation();
+    console.log('locations:', locations)
+    var strHtml = mapService.getLocation().map((location) => {
+        // console.log('strHtml', strHtml);
+        return `
+        <li>${location.lat}${location.lng}${location.locationName}<button>GO</button><button>Delete</button></li>`
+    })
+    document.querySelector('.list').innerHTML = strHtml.join('')
 }
