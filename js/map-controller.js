@@ -13,7 +13,7 @@ function getWeather() {
         })
 }
 
-function renderWeather(weather) {}
+function renderWeather(weather) { }
 mapService.getLocs()
     .then(locs => console.log('locs', locs))
 window.onload = () => {
@@ -47,22 +47,24 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                    center: { lat, lng },
-                    zoom: 15
-                })
+                center: { lat, lng },
+                zoom: 15
+            })
             console.log('Map!', gMap);
             //set on map click listener
             gMap.addListener('click', (mapsMouseEvent) => {
                 const pos = {
-                        lat: mapsMouseEvent.latLng.lat(),
-                        lng: mapsMouseEvent.latLng.lng()
-                    }
-                    //camera move to location
+                    lat: mapsMouseEvent.latLng.lat(),
+                    lng: mapsMouseEvent.latLng.lng()
+                }
+
+                currLatLng = pos
+                //camera move to location
                 panTo(pos.lat, pos.lng)
                 addMarker(pos)
                 var LatLng = new google.maps.LatLng(pos.lat, pos.lng);
                 let geocoder = new google.maps.Geocoder
-                geocoder.geocode({ 'latLng': LatLng }, function(res, status) {
+                geocoder.geocode({ 'latLng': LatLng }, function (res, status) {
                     if (status === google.maps.GeocoderStatus.OK) {
                         const locationName = res[0].formatted_address
                         const location = {
@@ -94,6 +96,7 @@ function panTo(lat, lng) {
     gMap.panTo(laLatLng);
     currLatLng = { lat, lng }
 }
+
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
 function getPosition() {
     console.log('Getting Pos');
@@ -101,6 +104,7 @@ function getPosition() {
         navigator.geolocation.getCurrentPosition(resolve, reject)
     })
 }
+
 window.getCurrLocation = (ev) => {
     ev.preventDefault()
     if (!navigator.geolocation) return
@@ -109,6 +113,7 @@ window.getCurrLocation = (ev) => {
         panTo(currPos.coords.latitude, currPos.coords.longitude)
     })
 }
+
 window.onLocationSearch = (ev) => {
     ev.preventDefault()
     const searchTerm = document.getElementById('search-location').value
@@ -123,19 +128,24 @@ window.onLocationSearch = (ev) => {
         }
     })
 }
-window.onCopyToClipboardClicked = () => {
+
+window.onCopyToClipboardClicked = (ev) => {
+    ev.preventDefault()
     if (!currLatLng) return
     const textArea = document.createElement("textarea");
     document.body.appendChild(textArea)
     const url = window.location.href
     textArea.value = `${url}?lat=${currLatLng.lat}&lng=${currLatLng.lng}`
     textArea.select()
+    console.log(textArea.value, "text area value")
     document.execCommand('copy')
 }
+
 window.onGoToLocation = (lat, lng) => {
     console.log(lat, lng)
     panTo(lat, lng)
 }
+
 window.onDeleteLocation = id => {
     mapService.deleteLocation(id)
     renderLocationList()
