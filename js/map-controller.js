@@ -18,6 +18,7 @@ function getWeather() {
 
 function renderWeather(weather) {
     
+
 }
 
 mapService.getLocs()
