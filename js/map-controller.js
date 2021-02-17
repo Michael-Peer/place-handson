@@ -41,9 +41,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                    center: { lat, lng },
-                    zoom: 15
-                })
+                center: { lat, lng },
+                zoom: 15
+            })
             console.log('Map!', gMap);
 
             //set on map click listener
@@ -126,7 +126,21 @@ window.onLocationSearch = (ev) => {
             panTo(lat, lng)
         }
     })
+}
 
+window.onCopyToClipboardClicked = () => {
+    let url = window.location.href
+    console.log(url)
+}
+
+window.onGoToLocation = (lat, lng) => {
+    console.log(lat, lng)
+    panTo(lat, lng)
+}
+
+window.onDeleteLocation = id => {
+    mapService.deleteLocation(id)
+    renderLocationList()
 }
 
 
@@ -147,11 +161,11 @@ renderLocationList()
 
 function renderLocationList() {
     const locations = mapService.getLocation();
-    console.log('locations:sadsadsadasdasd', locations)
+    console.log('locations:', locations)
     var strHtml = locations.map((location) => {
         // console.log('strHtml', strHtml);
         return `
-        <li>${location.lat}${location.lng}${location.locationName}<button>GO</button><button>Delete</button></li>`
+        <li>${location.lat}${location.lng}${location.locationName}<button onclick="onGoToLocation(${location.lat}, ${location.lng})" >GO</button ><button  onclick="onDeleteLocation('${location.id}')">Delete</button></li>`
     })
     document.querySelector('.list').innerHTML = strHtml.join('')
 }

@@ -8,7 +8,8 @@ let gLocations = []
 export const mapService = {
     getLocs,
     saveLocation,
-    getLocation
+    getLocation,
+    deleteLocation
 }
 
 var locs = [{ lat: 11.22, lng: 22.11 }]
@@ -31,10 +32,20 @@ function getLocs() {
     });
 }
 
+function deleteLocation(id) {
+    const locationIdx = gLocations.findIndex((location) => {
+        return location.id === id
+    })
+    if(locationIdx === -1) return
+    gLocations.splice(locationIdx, 1)
+    storageSevice.saveToStorage(KEY, gLocations)
+
+}
+
 function saveLocation(location) {
     location.id = utilService.makeId()
     gLocations.push(location)
-        // console.log(location)
+    // console.log(location)
     storageSevice.saveToStorage(KEY, gLocations)
 }
 console.log('hey', getLocation());
