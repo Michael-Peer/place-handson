@@ -54,24 +54,24 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 addMarker(pos)
 
                 var LatLng = new google.maps.LatLng(pos.lat, pos.lng);
-                let locationName
 
                 const geocoder = new google.maps.Geocoder
                 geocoder.geocode({ 'latLng': LatLng }, function(res, status) {
                     if (status === google.maps.GeocoderStatus.OK) {
-                        locationName = res[0].formatted_address
+                        const locationName = res[0].formatted_address
+                        const location = {
+                            lat: pos.lat,
+                            lng: pos.lng,
+                            locationName: locationName,
+                            creadtedAt: Date.now(),
+                            updatedAt: Date.now()
+                        }
+                        mapService.saveLocation(location)
                     }
                 })
 
-                const location = {
-                    lat: pos.lat,
-                    lng: pos.lng,
-                    locationName: locationName,
-                    creadtedAt: Date.now(),
-                    updatedAt: Date.now()
-                }
 
-                mapService.saveLocation(location)
+
             })
         })
 }
@@ -111,4 +111,16 @@ function _connectGoogleApi() {
         elGoogleApi.onload = resolve;
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
+}
+renderLocationList()
+
+function renderLocationList() {
+    const locations = mapService.getLocation();
+    console.log('locations:', locations)
+    var strHtml = mapService.getLocation().map((location) => {
+        // console.log('strHtml', strHtml);
+        return `
+        <li>${location.lat}${location.lng}${location.locationName}<button>GO</button><button>Delete</button></li>`
+    })
+    document.querySelector('.list').innerHTML = strHtml.join('')
 }

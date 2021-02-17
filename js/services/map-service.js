@@ -6,7 +6,8 @@ const KEY = 'locationDB';
 
 export const mapService = {
     getLocs,
-    saveLocation
+    saveLocation,
+    getLocation
 }
 
 var locs = [{ lat: 11.22, lng: 22.11 }]
@@ -30,8 +31,14 @@ function getLocs() {
 }
 
 function saveLocation(location) {
+    const locations = []
     location.id = utilService.makeId()
+    locations.push(location)
     console.log(location)
-    storageSevice.saveToStorage(KEY, location)
+    storageSevice.saveToStorage(KEY, locations)
 }
+console.log('hey', getLocation());
 
+function getLocation() {
+    return storageSevice.loadFromStorage(KEY)
+}
