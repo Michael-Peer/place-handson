@@ -1,15 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
     <title>ES6</title>
 </head>
+
 <body>
-    <h1>ES6</h1>
+    <header class="main-header">
+        <h1>TravelTip</h1>
+        <form class="header-form">
+            <label for="search-location">Enter Location</label>
+            <input type="text" name="location-input" id="search-location" placeholder="Enter Location">
+            <input type="submit" name="Search_Location" value="Go" onclick="getLocation()">
+        </form>
+        <button onclick="getCurrLocation()">My location</button>
+
+    </header>
     <div id="map" style="width: 100%; height: 400px;"></div>
     <button class="btn">Click Me</button>
-    
+
     <script type="module" src="js/map-controller.js"></script>
 </body>
+
 </html>
