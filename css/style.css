@@ -48,8 +48,8 @@ h6 {
     max-width: 1060px;
 }
 
-
-/* .list-container {
-    /* width: auto;
+.list-container {
+    width: auto;
     height: auto;
-    background-color: grey; */
+    background-color: grey;
+}
