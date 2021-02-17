@@ -3,6 +3,7 @@ import { utilService } from './util-service.js'
 
 
 const KEY = 'locationDB';
+const gLocations = []
 
 export const mapService = {
     getLocs,
@@ -31,7 +32,6 @@ function getLocs() {
 }
 
 function saveLocation(location) {
-    const locations = []
     location.id = utilService.makeId()
     locations.push(location)
     console.log(location)
@@ -40,5 +40,6 @@ function saveLocation(location) {
 console.log('hey', getLocation());
 
 function getLocation() {
-    return storageSevice.loadFromStorage(KEY)
+    gLocations = storageSevice.loadFromStorage(KEY) || []
+    return gLocations
 }
