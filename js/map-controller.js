@@ -13,9 +13,6 @@ function getWeather() {
         })
 }
 
-<<<<<<< HEAD
-function renderWeather(weather) { }
-=======
 function renderWeather(weather) {
     const currLocationWeather = weather
     console.log('currLocationWeather:', currLocationWeather.description)
@@ -24,7 +21,6 @@ function renderWeather(weather) {
 
     document.querySelector('.weather-container').innerHTML = strHtml
 }
->>>>>>> 5622c9af8fabe44002b41ff60e549d2f6df602d0
 mapService.getLocs()
     .then(locs => console.log('locs', locs))
 window.onload = () => {
@@ -87,6 +83,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                         }
                         mapService.saveLocation(location)
                         renderLocationList()
+                        getWeather()
                     }
                 })
             })
