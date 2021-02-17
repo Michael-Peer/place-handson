@@ -1,6 +1,7 @@
 import { mapService } from './services/map-service.js'
 
 var gMap;
+let currLatLng = null
 console.log('Main!');
 
 
@@ -34,7 +35,11 @@ window.onload = () => {
 }
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
-    console.log('InitMap');
+    currLatLng = { lat, lng }
+    if (isQueryParamsAvailable()) {
+        lat = currLatLng.lat
+        lng = currLatLng.lng
+    }
     return _connectGoogleApi()
         .then(() => {
 
@@ -94,6 +99,7 @@ function addMarker(loc) {
 function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng);
     gMap.panTo(laLatLng);
+    currLatLng = { lat, lng }
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -129,8 +135,15 @@ window.onLocationSearch = (ev) => {
 }
 
 window.onCopyToClipboardClicked = () => {
-    let url = window.location.href
-    console.log(url)
+    if (!currLatLng) return
+    const textArea = document.createElement("textarea");
+    document.body.appendChild(textArea)
+
+    const url = window.location.href
+    textArea.value = `${url}?lat=${currLatLng.lat}&lng=${currLatLng.lng}`
+    textArea.select()
+
+    document.execCommand('copy')
 }
 
 window.onGoToLocation = (lat, lng) => {
@@ -168,4 +181,20 @@ function renderLocationList() {
         <li>${location.lat}${location.lng}${location.locationName}<button onclick="onGoToLocation(${location.lat}, ${location.lng})" >GO</button ><button  onclick="onDeleteLocation('${location.id}')">Delete</button></li>`
     })
     document.querySelector('.list').innerHTML = strHtml.join('')
+}
+
+function isQueryParamsAvailable() {
+    console.log("rummingggg");
+    const urlStr = window.location.href;
+    const url = new URL(urlStr);
+    const lat = +url.searchParams.get("lat");
+    const lng = +url.searchParams.get("lng");
+    if (!lat || !lng) return false
+    console.log(lat, lng)
+    currLatLng = {
+        lat,
+        lng
+    }
+    console.log(currLatLng)
+    return true
 }
