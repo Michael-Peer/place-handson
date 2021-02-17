@@ -3,7 +3,7 @@ import { utilService } from './util-service.js'
 
 
 const KEY = 'locationDB';
-const gLocations = []
+let gLocations = []
 
 export const mapService = {
     getLocs,
