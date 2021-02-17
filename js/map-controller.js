@@ -3,6 +3,11 @@ import { mapService } from './services/map-service.js'
 var gMap;
 console.log('Main!');
 
+
+window.onInit = () => {
+    const locations = mapService.getLocation()
+}
+
 mapService.getLocs()
     .then(locs => console.log('locs', locs))
 
