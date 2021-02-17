@@ -32,13 +32,29 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
     console.log('InitMap');
     return _connectGoogleApi()
         .then(() => {
+
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                    center: { lat, lng },
-                    zoom: 15
-                })
+                center: { lat, lng },
+                zoom: 15
+            })
             console.log('Map!', gMap);
+
+            //set on map click listener
+            gMap.addListener('click', (mapsMouseEvent) => {
+
+                const pos = {
+                    lat: mapsMouseEvent.latLng.lat(),
+                    lng: mapsMouseEvent.latLng.lng()
+                }
+
+                //camera move to location
+                panTo(pos.lat, pos.lng)
+                addMarker(pos)
+
+                console.log("User clicked on: ", pos)
+            })
         })
 }
 
