@@ -14,8 +14,8 @@
         <form class="header-form">
             <label for="search-location">Enter Location</label>
             <input type="text" name="location-input" id="search-location" placeholder="Enter Location">
-            <input type="submit" name="Search_Location" value="Go" onclick="getLocation()">
-            <button onclick="getCurrLocation()" id="btn">My location</button>
+            <input type="submit" name="Search_Location" value="Go" onclick="onLocationSearch(event)">
+            <button onclick="getCurrLocation(event)" id="btn">My location</button>
         </form>
 
     </header>

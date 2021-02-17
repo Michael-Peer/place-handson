@@ -55,7 +55,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 
                 var LatLng = new google.maps.LatLng(pos.lat, pos.lng);
 
-                const geocoder = new google.maps.Geocoder
+                let geocoder = new google.maps.Geocoder
                 geocoder.geocode({ 'latLng': LatLng }, function (res, status) {
                     if (status === google.maps.GeocoderStatus.OK) {
                         const locationName = res[0].formatted_address
@@ -96,6 +96,31 @@ function getPosition() {
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject)
     })
+}
+
+window.getCurrLocation = (ev) => {
+    ev.preventDefault()
+    if (!navigator.geolocation) return
+    navigator.geolocation.getCurrentPosition((currPos) => {
+        console.log(currPos.coords)
+        panTo(currPos.coords.latitude, currPos.coords.longitude)
+    })
+}
+
+window.onLocationSearch = (ev) => {
+    ev.preventDefault()
+    const searchTerm = document.getElementById('search-location').value
+    if (!searchTerm) return
+    let geocoder = new google.maps.Geocoder
+    geocoder.geocode({ 'address': searchTerm }, (res, status) => {
+        if (status === google.maps.GeocoderStatus.OK) {
+            const lat = res[0].geometry.location.lat();
+            const lng = res[0].geometry.location.lng();
+            console.log(lat, lng, "Dasdassasadsadsadsad")
+            panTo(lat, lng)
+        }
+    })
+
 }
 
 
