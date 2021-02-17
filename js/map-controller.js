@@ -61,7 +61,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 var LatLng = new google.maps.LatLng(pos.lat, pos.lng);
 
                 let geocoder = new google.maps.Geocoder
-                geocoder.geocode({ 'latLng': LatLng }, function (res, status) {
+                geocoder.geocode({ 'latLng': LatLng }, function(res, status) {
                     if (status === google.maps.GeocoderStatus.OK) {
                         const locationName = res[0].formatted_address
                         const location = {
@@ -151,7 +151,7 @@ function renderLocationList() {
     var strHtml = locations.map((location) => {
         // console.log('strHtml', strHtml);
         return `
-        <li>${location.lat}${location.lng}${location.locationName}<button>GO</button><button>Delete</button></li>`
+        <li>${location.lat}${location.lng}${location.locationName}<button class="list-btn">GO</button><button class="list-btn">Delete</button></li>`
     })
     document.querySelector('.list').innerHTML = strHtml.join('')
 }

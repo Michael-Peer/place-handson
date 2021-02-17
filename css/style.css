@@ -18,9 +18,15 @@ li {
     margin-bottom: 10px;
 }
 
-button {
+.list-btn {
     margin: 5px;
     border-radius: 10px;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    color: rgb(124, 115, 115);
 }
 
 h1,
@@ -32,6 +38,11 @@ h6 {
     margin: 0;
     font-family: Lobster;
     color: rgb(189, 177, 177);
+}
+
+ul {
+    /* margin-left: 25px; */
+    padding-left: 25px;
 }
 
 .main-header {
@@ -55,7 +66,8 @@ h6 {
 }
 
 .list-container {
-    width: auto;
-    height: auto;
-    /* background-color: grey; */
+    width: 500px;
+    height: 200px;
+    overflow: auto;
+    background-color: antiquewhite;
 }
