@@ -14,7 +14,13 @@ li {
     margin: 0;
     list-style: none;
     font-size: 12px;
-    width: 40vw
+    width: 40vw;
+    margin-bottom: 10px;
+}
+
+button {
+    margin: 5px;
+    border-radius: 10px;
 }
 
 h1,
@@ -51,5 +57,5 @@ h6 {
 .list-container {
     width: auto;
     height: auto;
-    background-color: grey;
+    /* background-color: grey; */
 }
