@@ -17,7 +17,7 @@ function renderWeather(weather) {
     const currLocationWeather = weather
     console.log('currLocationWeather:', currLocationWeather.description)
     var strHtml = `
-         <h2>${weather.main}<h2><p>${weather.description}</p>`
+         <h2>${weather.main}<h2><p>${weather.description}</p><p class="wTemp">${weather.temp}</p>`
 
     document.querySelector('.weather-container').innerHTML = strHtml
 }

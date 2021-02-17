@@ -116,6 +116,11 @@ ul {
     align-items: center;
     background-color: lightyellow;
     color: grey;
+    height: 200px
+}
+
+.wTemp {
+    text-align: center;
 }
 
 

@@ -36,10 +36,12 @@ function getLocs() {
 
 function getWeather(pos) {
     console.log(pos)
-    return axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${pos.lat}&lon=${pos.lng}&APPID=${API_KEY}`)
-        .then(res => {
-            return res.data.weather[0]
-        })
+    return axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${pos.lat}&lon=${pos.lng}&units=metric&APPID=${API_KEY}`)
+
+    .then(res => {
+        res.data.weather[0].temp = res.data.main.temp
+        return res.data.weather[0]
+    })
 }
 
 function deleteLocation(id) {
@@ -55,7 +57,7 @@ function deleteLocation(id) {
 function saveLocation(location) {
     location.id = utilService.makeId()
     gLocations.push(location)
-    // console.log(location)
+        // console.log(location)
     storageSevice.saveToStorage(KEY, gLocations)
 }
 console.log('hey', getLocation());
