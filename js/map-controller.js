@@ -5,7 +5,7 @@ console.log('Main!');
 
 
 window.onInit = () => {
-    const locations = mapService.getLocation()
+    renderLocationList()
 }
 
 mapService.getLocs()
@@ -72,6 +72,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                             updatedAt: Date.now()
                         }
                         mapService.saveLocation(location)
+                        renderLocationList()
                     }
                 })
 
@@ -146,8 +147,8 @@ renderLocationList()
 
 function renderLocationList() {
     const locations = mapService.getLocation();
-    console.log('locations:', locations)
-    var strHtml = mapService.getLocation().map((location) => {
+    console.log('locations:sadsadsadasdasd', locations)
+    var strHtml = locations.map((location) => {
         // console.log('strHtml', strHtml);
         return `
         <li>${location.lat}${location.lng}${location.locationName}<button>GO</button><button>Delete</button></li>`
