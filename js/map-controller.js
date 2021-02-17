@@ -9,15 +9,29 @@ window.onInit = () => {
     renderLocationList()
 }
 
+function getWeather() {
+    mapService.getWeather(currLatLng)
+    .then(weahter => {
+        renderWeather(weahter)
+    })
+}
+
+function renderWeather(weather) {
+    
+}
+
 mapService.getLocs()
     .then(locs => console.log('locs', locs))
 
 window.onload = () => {
 
+
+
     document.querySelector('.btn').addEventListener('click', (ev) => {
         console.log('Aha!', ev.target);
         panTo(35.6895, 139.6917);
     })
+
 
     initMap()
         .then(() => {
@@ -36,19 +50,23 @@ window.onload = () => {
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
     currLatLng = { lat, lng }
+
     if (isQueryParamsAvailable()) {
         lat = currLatLng.lat
         lng = currLatLng.lng
     }
+
+    getWeather()
+
     return _connectGoogleApi()
         .then(() => {
 
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                    center: { lat, lng },
-                    zoom: 15
-                })
+                center: { lat, lng },
+                zoom: 15
+            })
             console.log('Map!', gMap);
 
             //set on map click listener
@@ -66,7 +84,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 var LatLng = new google.maps.LatLng(pos.lat, pos.lng);
 
                 let geocoder = new google.maps.Geocoder
-                geocoder.geocode({ 'latLng': LatLng }, function(res, status) {
+                geocoder.geocode({ 'latLng': LatLng }, function (res, status) {
                     if (status === google.maps.GeocoderStatus.OK) {
                         const locationName = res[0].formatted_address
                         const location = {
