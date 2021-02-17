@@ -15,11 +15,11 @@
             <label for="search-location">Enter Location</label>
             <input type="text" name="location-input" id="search-location" placeholder="Enter Location">
             <input type="submit" name="Search_Location" value="Go" onclick="getLocation()">
+            <button onclick="getCurrLocation()" id="btn">My location</button>
         </form>
-        <button onclick="getCurrLocation()">My location</button>
 
     </header>
-    <div id="map" style="width: 100%; height: 400px;"></div>
+    <div class="map-container" id="map" style="width: 45%; height: 400px;"></div>
     <button class="btn">Click Me</button>
 
     <script type="module" src="js/map-controller.js"></script>

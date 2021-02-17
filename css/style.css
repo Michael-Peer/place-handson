@@ -1,3 +1,33 @@
 * {
     box-sizing: border-box;
 }
+
+@font-face {
+    font-family: Lobster;
+    src: url(../fonts/Lobster-Regular.ttf)
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    font-family: Lobster;
+    color: rgb(189, 177, 177);
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5625rem;
+    background-color: lightgreen;
+    max-width: 1060px;
+    margin-bottom: 1.25rem;
+    align-items: center;
+}
+
+.map-container {
+    padding: 20px;
+}
