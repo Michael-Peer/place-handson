@@ -8,6 +8,21 @@ window.onInit = () => {
     renderLocationList()
 }
 
+<<<<<<< HEAD
+=======
+function getWeather() {
+    mapService.getWeather(currLatLng)
+    .then(weahter => {
+        renderWeather(weahter)
+    })
+}
+
+function renderWeather(weather) {
+    
+
+}
+
+>>>>>>> 3cd61bda0f10d07d24bfccb97f222dda44cd0b01
 mapService.getLocs()
     .then(locs => console.log('locs', locs))
 
