@@ -126,7 +126,21 @@ window.onLocationSearch = (ev) => {
             panTo(lat, lng)
         }
     })
+}
 
+window.onCopyToClipboardClicked = () => {
+    let url = window.location.href
+    console.log(url)
+}
+
+window.onGoToLocation = (lat, lng) => {
+    console.log(lat, lng)
+    panTo(lat, lng)
+}
+
+window.onDeleteLocation = id => {
+    mapService.deleteLocation(id)
+    renderLocationList()
 }
 
 
@@ -147,11 +161,11 @@ renderLocationList()
 
 function renderLocationList() {
     const locations = mapService.getLocation();
-    console.log('locations:sadsadsadasdasd', locations)
+    console.log('locations:', locations)
     var strHtml = locations.map((location) => {
-        // console.log('strHtml', strHtml);
         return `
-        <li>${location.lat}${location.lng}${location.locationName}<button class="list-btn">GO</button><button class="list-btn">Delete</button></li>`
+       
+        <li>Lat:${location.lat}<br />Lng:${location.lng}<br />${location.locationName}<button class="list-btn" onclick="onGoToLocation(${location.lat}, ${location.lng})" >GO</button ><button class="list-btn" onclick="onDeleteLocation('${location.id}')">Delete</button></li>`
     })
     document.querySelector('.list').innerHTML = strHtml.join('')
 }

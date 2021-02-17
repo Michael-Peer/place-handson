@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/939f1d3268.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
     <title>ES6</title>
 </head>
@@ -12,10 +13,11 @@
     <header class="main-header">
         <h1>TravelTip</h1>
         <form class="header-form">
-            <label for="search-location">Enter Location</label>
+            <label for="search-location"><i class="fas fa-search"></i></label>
             <input type="text" name="location-input" id="search-location" placeholder="Enter Location">
-            <input type="submit" name="Search_Location" value="Go" onclick="onLocationSearch(event)">
-            <button onclick="getCurrLocation(event)" id="btn">My location</button>
+            <input type="submit" class="submit-btn" name="Search_Location" value="Go" onclick="onLocationSearch(event)">
+            <button onclick="getCurrLocation(event)" class="currLocation">My location</button>
+            <button onclick="onCopyToClipboardClicked()" class="currLocation">Copy to clipboard</button>
         </form>
 
     </header>
@@ -26,9 +28,10 @@
             <ul class="list"></ul>
         </div>
     </div>
-    <button class="btn">Click Me</button>
+    <button class="btn" hidden>Click Me</button>
 
     <script type="module" src="js/map-controller.js"></script>
 </body>
+
 
 </html>
