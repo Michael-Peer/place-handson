@@ -174,7 +174,6 @@ function renderLocationList() {
     console.log('locations:', locations)
     var strHtml = locations.map((location) => {
         return `
-       
         <li>Lat:${location.lat}<br />Lng:${location.lng}<br />${location.locationName}<button class="list-btn" onclick="onGoToLocation(${location.lat}, ${location.lng})" >GO</button ><button class="list-btn" onclick="onDeleteLocation('${location.id}')">Delete</button></li>`
     })
     document.querySelector('.list').innerHTML = strHtml.join('')
