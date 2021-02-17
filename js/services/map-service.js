@@ -33,9 +33,9 @@ function getLocs() {
 
 function saveLocation(location) {
     location.id = utilService.makeId()
-    locations.push(location)
-    console.log(location)
-    storageSevice.saveToStorage(KEY, locations)
+    gLocations.push(location)
+        // console.log(location)
+    storageSevice.saveToStorage(KEY, gLocations)
 }
 console.log('hey', getLocation());
 
