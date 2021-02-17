@@ -1,7 +1,6 @@
 import { mapService } from './services/map-service.js'
 
 var gMap;
-let currLatLng = null
 console.log('Main!');
 
 
@@ -35,11 +34,7 @@ window.onload = () => {
 }
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
-    currLatLng = { lat, lng }
-    if (isQueryParamsAvailable()) {
-        lat = currLatLng.lat
-        lng = currLatLng.lng
-    }
+    console.log('InitMap');
     return _connectGoogleApi()
         .then(() => {
 
@@ -88,9 +83,19 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 }
 
 function addMarker(loc) {
+    const svgMarker = {
+        path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+        fillColor: 'green',
+        fillOpacity: 0.5,
+        strokeWeight: 0,
+        rotation: 0,
+        scale: 2,
+        anchor: new google.maps.Point(15, 30),
+    };
     var marker = new google.maps.Marker({
         position: loc,
         map: gMap,
+        icon: svgMarker,
         title: 'Hello World!'
     });
     return marker;
@@ -99,7 +104,6 @@ function addMarker(loc) {
 function panTo(lat, lng) {
     var laLatLng = new google.maps.LatLng(lat, lng);
     gMap.panTo(laLatLng);
-    currLatLng = { lat, lng }
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -135,15 +139,8 @@ window.onLocationSearch = (ev) => {
 }
 
 window.onCopyToClipboardClicked = () => {
-    if (!currLatLng) return
-    const textArea = document.createElement("textarea");
-    document.body.appendChild(textArea)
-
-    const url = window.location.href
-    textArea.value = `${url}?lat=${currLatLng.lat}&lng=${currLatLng.lng}`
-    textArea.select()
-
-    document.execCommand('copy')
+    let url = window.location.href
+    console.log(url)
 }
 
 window.onGoToLocation = (lat, lng) => {
@@ -181,20 +178,4 @@ function renderLocationList() {
         <li>Lat:${location.lat}<br />Lng:${location.lng}<br />${location.locationName}<button class="list-btn" onclick="onGoToLocation(${location.lat}, ${location.lng})" >GO</button ><button class="list-btn" onclick="onDeleteLocation('${location.id}')">Delete</button></li>`
     })
     document.querySelector('.list').innerHTML = strHtml.join('')
-}
-
-function isQueryParamsAvailable() {
-    console.log("rummingggg");
-    const urlStr = window.location.href;
-    const url = new URL(urlStr);
-    const lat = +url.searchParams.get("lat");
-    const lng = +url.searchParams.get("lng");
-    if (!lat || !lng) return false
-    console.log(lat, lng)
-    currLatLng = {
-        lat,
-        lng
-    }
-    console.log(currLatLng)
-    return true
 }
