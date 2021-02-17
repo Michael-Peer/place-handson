@@ -36,9 +36,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                center: { lat, lng },
-                zoom: 15
-            })
+                    center: { lat, lng },
+                    zoom: 15
+                })
             console.log('Map!', gMap);
 
             //set on map click listener
@@ -57,7 +57,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 let locationName
 
                 const geocoder = new google.maps.Geocoder
-                geocoder.geocode({ 'latLng': LatLng }, function (res, status) {
+                geocoder.geocode({ 'latLng': LatLng }, function(res, status) {
                     if (status === google.maps.GeocoderStatus.OK) {
                         locationName = res[0].formatted_address
                     }
@@ -66,6 +66,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 const location = {
                     lat: pos.lat,
                     lng: pos.lng,
+                    locationName: locationName,
                     creadtedAt: Date.now(),
                     updatedAt: Date.now()
                 }
