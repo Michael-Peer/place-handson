@@ -37,11 +37,11 @@ function getLocs() {
 function getWeather(pos) {
     console.log(pos)
     return axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${pos.lat}&lon=${pos.lng}&units=metric&APPID=${API_KEY}`)
-
-    .then(res => {
-        res.data.weather[0].temp = res.data.main.temp
-        return res.data.weather[0]
-    })
+        .then(res => {
+            console.log(res)
+            res.data.weather[0].temp = res.data.main.temp
+            return res.data.weather[0]
+        })
 }
 
 function deleteLocation(id) {
